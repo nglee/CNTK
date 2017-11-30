@@ -570,53 +570,53 @@ $(CNTKLIBRARY_LIB): $(CNTKLIBRARY_OBJ) | $(CNTKMATH_LIB)
 #	@echo creating $@ for $(ARCH) with build type $(BUILDTYPE)
 #	@mkdir -p $(dir $@)
 #	$(CXX) $(LDFLAGS) -shared $(patsubst %,-L%, $(LIBDIR)) $(patsubst %,$(RPATH)%, $(LIBDIR) $(ORIGINDIR)) -o $@ $^ -l$(CNTKLIBRARY) $(SOURCEDIR)/../Examples/Extensibility/BinaryConvolution/BinaryConvolutionLib/halide/halide_convolve_nofeatures.a
-
-
-########################################
-# LibEval
-########################################
-
-EVAL:=Cntk.Eval-$(CNTK_COMPONENT_VERSION)
-
-SGDLIB_SRC=\
-	$(SOURCEDIR)/SGDLib/ASGDHelper.cpp \
-	$(SOURCEDIR)/SGDLib/Profiler.cpp \
-	$(SOURCEDIR)/SGDLib/SGD.cpp \
-	$(SOURCEDIR)/SGDLib/PostComputingActions.cpp \
-
-SGDLIB_SRC+=$(CNTKLIBRARY_COMMON_SRC)
-
-EVAL_SRC=\
-	$(SOURCEDIR)/EvalDll/CNTKEval.cpp \
-	$(SOURCEDIR)/CNTK/BrainScript/BrainScriptEvaluator.cpp \
-	$(SOURCEDIR)/CNTK/BrainScript/BrainScriptParser.cpp \
-	$(SOURCEDIR)/CNTK/ModelEditLanguage.cpp \
-	$(SOURCEDIR)/ActionsLib/EvalActions.cpp \
-	$(SOURCEDIR)/ActionsLib/NetworkFactory.cpp \
-	$(SOURCEDIR)/ActionsLib/NetworkDescriptionLanguage.cpp \
-	$(SOURCEDIR)/ActionsLib/SimpleNetworkBuilder.cpp \
-	$(SOURCEDIR)/ActionsLib/NDLNetworkBuilder.cpp \
-
-EVAL_SRC+=$(SGDLIB_SRC)
-EVAL_SRC+=$(COMPUTATION_NETWORK_LIB_SRC)
-EVAL_SRC+=$(CNTK_COMMON_SRC)
-EVAL_SRC+=$(SEQUENCE_TRAINING_LIB_SRC)
-
-EVAL_OBJ:=\
-	$(patsubst %.cu, $(OBJDIR)/%.o, $(filter %.cu, $(EVAL_SRC))) \
-	$(patsubst %.pb.cc, $(OBJDIR)/%.pb.o, $(filter %.pb.cc, $(EVAL_SRC))) \
-	$(patsubst %.cpp, $(OBJDIR)/%.o, $(filter %.cpp, $(EVAL_SRC)))
-
-EVAL_LIB:=$(LIBDIR)/lib$(EVAL).so
-ALL_LIBS+=$(EVAL_LIB)
-SRC+=$(EVAL_SRC)
-
-$(EVAL_LIB): $(EVAL_OBJ) | $(CNTKMATH_LIB)
-	@echo $(SEPARATOR)
-	@mkdir -p $(dir $@)
-	@echo Building $(EVAL_LIB) for $(ARCH) with build type $(BUILDTYPE)
-	$(CXX) $(LDFLAGS) -shared $(patsubst %,-L%, $(LIBDIR) $(LIBPATH) $(GDK_NVML_LIB_PATH)) $(patsubst %,$(RPATH)%, $(ORIGINDIR) $(LIBPATH)) -o $@ $^ $(LIBS) -l$(CNTKMATH) -ldl $(lMULTIVERSO) $(PROTOBUF_PATH)/lib/libprotobuf.a -llapacke -llapack -lgfortran -lnvidia-ml
-
+#
+#
+#########################################
+## LibEval
+#########################################
+#
+#EVAL:=Cntk.Eval-$(CNTK_COMPONENT_VERSION)
+#
+#SGDLIB_SRC=\
+#	$(SOURCEDIR)/SGDLib/ASGDHelper.cpp \
+#	$(SOURCEDIR)/SGDLib/Profiler.cpp \
+#	$(SOURCEDIR)/SGDLib/SGD.cpp \
+#	$(SOURCEDIR)/SGDLib/PostComputingActions.cpp \
+#
+#SGDLIB_SRC+=$(CNTKLIBRARY_COMMON_SRC)
+#
+#EVAL_SRC=\
+#	$(SOURCEDIR)/EvalDll/CNTKEval.cpp \
+#	$(SOURCEDIR)/CNTK/BrainScript/BrainScriptEvaluator.cpp \
+#	$(SOURCEDIR)/CNTK/BrainScript/BrainScriptParser.cpp \
+#	$(SOURCEDIR)/CNTK/ModelEditLanguage.cpp \
+#	$(SOURCEDIR)/ActionsLib/EvalActions.cpp \
+#	$(SOURCEDIR)/ActionsLib/NetworkFactory.cpp \
+#	$(SOURCEDIR)/ActionsLib/NetworkDescriptionLanguage.cpp \
+#	$(SOURCEDIR)/ActionsLib/SimpleNetworkBuilder.cpp \
+#	$(SOURCEDIR)/ActionsLib/NDLNetworkBuilder.cpp \
+#
+#EVAL_SRC+=$(SGDLIB_SRC)
+#EVAL_SRC+=$(COMPUTATION_NETWORK_LIB_SRC)
+#EVAL_SRC+=$(CNTK_COMMON_SRC)
+#EVAL_SRC+=$(SEQUENCE_TRAINING_LIB_SRC)
+#
+#EVAL_OBJ:=\
+#	$(patsubst %.cu, $(OBJDIR)/%.o, $(filter %.cu, $(EVAL_SRC))) \
+#	$(patsubst %.pb.cc, $(OBJDIR)/%.pb.o, $(filter %.pb.cc, $(EVAL_SRC))) \
+#	$(patsubst %.cpp, $(OBJDIR)/%.o, $(filter %.cpp, $(EVAL_SRC)))
+#
+#EVAL_LIB:=$(LIBDIR)/lib$(EVAL).so
+#ALL_LIBS+=$(EVAL_LIB)
+#SRC+=$(EVAL_SRC)
+#
+#$(EVAL_LIB): $(EVAL_OBJ) | $(CNTKMATH_LIB)
+#	@echo $(SEPARATOR)
+#	@mkdir -p $(dir $@)
+#	@echo Building $(EVAL_LIB) for $(ARCH) with build type $(BUILDTYPE)
+#	$(CXX) $(LDFLAGS) -shared $(patsubst %,-L%, $(LIBDIR) $(LIBPATH) $(GDK_NVML_LIB_PATH)) $(patsubst %,$(RPATH)%, $(ORIGINDIR) $(LIBPATH)) -o $@ $^ $(LIBS) -l$(CNTKMATH) -ldl $(lMULTIVERSO) $(PROTOBUF_PATH)/lib/libprotobuf.a
+#
 #########################################
 ## Eval Sample clients
 #########################################
