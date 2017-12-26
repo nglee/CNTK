@@ -561,7 +561,7 @@ BINARY_CONVOLUTION_EXAMPLE_LIBRARY_SRC =\
 BINARY_CONVOLUTION_EXAMPLE_LIBRARY_OBJ := $(patsubst %.cpp, $(OBJDIR)/%.o, $(BINARY_CONVOLUTION_EXAMPLE_LIBRARY_SRC))
 
 BINARY_CONVOLUTION_EXAMPLE_LIB:= $(LIBDIR)/Cntk.BinaryConvolutionExample-$(CNTK_COMPONENT_VERSION).so
-ALL_LIBS += $(BINARY_CONVOLUTION_EXAMPLE_LIB)
+#ALL_LIBS += $(BINARY_CONVOLUTION_EXAMPLE_LIB)
 PYTHON_LIBS += $(BINARY_CONVOLUTION_EXAMPLE_LIB)
 SRC += $(BINARY_CONVOLUTION_EXAMPLE_LIBRARY_SRC)
 
@@ -1243,7 +1243,6 @@ $(UNITTEST_NETWORK): $(UNITTEST_NETWORK_OBJ) | $(READER_LIBS) $(CNTKTEXTFORMATRE
 
 UNITTEST_MATH_SRC = \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/BatchNormalizationEngineTests.cpp \
-	$(SOURCEDIR)/../Tests/UnitTests/MathTests/BlockMultiplierTests.cpp \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/constants.cpp \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/ConvolutionEngineTests.cpp \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/CPUMatrixTests.cpp \
@@ -1263,6 +1262,7 @@ UNITTEST_MATH_SRC = \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/MatrixTests.cpp \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/MatrixLearnerTests.cpp \
 	$(SOURCEDIR)/../Tests/UnitTests/MathTests/stdafx.cpp \
+	#$(SOURCEDIR)/../Tests/UnitTests/MathTests/BlockMultiplierTests.cpp \
 
 UNITTEST_MATH_SRC += $(CNTK_COMMON_SRC)
 UNITTEST_MATH_OBJ := $(patsubst %.cpp, $(OBJDIR)/%.o, $(UNITTEST_MATH_SRC))
