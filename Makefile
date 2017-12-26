@@ -131,7 +131,6 @@ ifdef CUDA_PATH
     GDK_NVML_LIB_PATH=/usr/src/gdk/nvml/lib
     $(info defaulting GDK_NVML_LIB_PATH to $(GDK_NVML_LIB_PATH))
   endif
-  GDK_NVML_LIB_PATH=
 
   ifndef CUB_PATH
     $(info defaulting CUB_PATH to /usr/local/cub-1.4.1)
@@ -148,7 +147,7 @@ ifdef CUDA_PATH
 # Set up CUDA includes and libraries
   INCLUDEPATH += $(CUDA_PATH)/include
   LIBPATH += $(CUDA_PATH)/lib64
-  LIBS_LIST += cublas cudart cuda curand cusparse #nvidia-ml
+  LIBS_LIST += cublas cudart cuda curand cusparse nvidia-ml
 
 # Set up cuDNN if needed
   ifdef CUDNN_PATH
@@ -1433,7 +1432,7 @@ DEP := $(patsubst %.o, %.d, $(OBJ))
 # will result in the rebuild.
 -include ${DEP}
 
-#BUILD_CONFIGURATION := Makefile $(BUILD_TOP)/Config.make
+BUILD_CONFIGURATION := Makefile $(BUILD_TOP)/Config.make
 
 %.pb.cc : %.proto $(BUILD_CONFIGURATION)
 	@echo $(SEPARATOR)
