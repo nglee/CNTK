@@ -325,7 +325,7 @@ $(PERF_PROFILER_LIB): $(PP_OBJ)
 	@echo $(SEPARATOR)
 	@echo creating $@ for $(ARCH) with build type $(BUILDTYPE)
 	@mkdir -p $(dir $@)
-	$(CXX) $(LDFLAGS) -shared $(patsubst %,$(RPATH)%, $(ORIGINDIR)) -o $@ $^ -llapacke -llapack -lgfortran
+	$(CXX) $(LDFLAGS) -shared $(patsubst %,$(RPATH)%, $(ORIGINDIR)) -o $@ $^ -llapacke -llapack -lgfortran -lnvidia-ml
 
 
 ########################################
